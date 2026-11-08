@@ -284,7 +284,7 @@ private fun ControlsBottomViewPreview() {
                     ),
                 ),
                 controlsAlignment = Alignment.Start,
-                videoContentScale = VideoContentScale.FIT,
+                videoContentScale = VideoContentScale.BEST_FIT,
                 isPipSupported = true,
                 showRemainingTime = true,
                 onToggleTimeDisplay = {},
