@@ -1,0 +1,16 @@
+﻿# Project Architecture & Token Optimization Rules
+- Tech Stack: Kotlin, Jetpack Compose, Material3, AndroidX Media3 (ExoPlayer), Hilt DI, Room DB, Proto DataStore (kotlinx.serialization).
+- Module Map:
+  * :app -> App entry point, MainActivity, top-level navigation.
+  * :core:model -> Pure Kotlin data classes (PlayerPreferences, ApplicationPreferences, Video).
+  * :core:datastore -> Preferences serialization & DataStore repositories (PreferencesRepository).
+  * :core:database -> Room entities, DAOs (MediumDao, DirectoryDao), local playback state persistence.
+  * :core:media -> MediaStore scanner, MediaService, MediaSynchronizer, thumbnail generation.
+  * :core:ui -> Shared Compose theme, icons, reusable components, strings.xml.
+  * :feature:player -> ExoPlayer UI/Compose overlay, PlayerViewModel, touch gesture handlers, subtitle/audio dialogs.
+  * :feature:settings -> Settings screens (PlaybackPreferencesScreen, MediaLibraryPreferencesScreen, etc.).
+  * :feature:videopicker -> Home screen video/folder grid & list UI.
+- STRICT RULES:
+  1. Never scan the entire repository. Only read files inside the modules explicitly mentioned in the user prompt.
+  2. Do NOT run ./gradlew build commands automatically unless explicitly asked.
+  3. Reuse existing dependencies in gradle/libs.versions.toml before adding any third-party libraries.
