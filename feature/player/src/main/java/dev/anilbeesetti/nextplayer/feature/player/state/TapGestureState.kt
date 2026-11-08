@@ -72,7 +72,7 @@ class TapGestureState(
 ) {
     var seekMillis by mutableLongStateOf(value = 0L)
     var isLongPressGestureInAction by mutableStateOf(value = false)
-    var liveLongPressSpeed by mutableFloatStateOf(value = longPressSpeed)
+    var liveLongPressSpeed by mutableStateOf(value = longPressSpeed)
 
     private var resetJob: Job? = null
     private var currentSpeed: Float = player.playbackParameters.speed
