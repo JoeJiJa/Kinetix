@@ -143,7 +143,7 @@ fun PlayerGestures(
                         },
                         onHorizontalDrag = { change, dragAmount ->
                             if (tapGestureState.isLongPressGestureInAction) {
-                                tapGestureState.handleLongPressDrag(change.positionChange().x)
+                                tapGestureState.handleLongPressDrag(dragAmount)
                             } else {
                                 seekGestureState.onDrag(change, dragAmount)
                             }
