@@ -575,5 +575,4 @@
     <string name="downloading_subtitle">Downloading subtitle…</string>
     <string name="subtitle_applied_successfully">Subtitle applied successfully</string>
     <string name="failed_to_download_subtitle">Failed to download subtitle</string>
-    <string name="search">Search</string>
 </resources>
