@@ -1,4 +1,5 @@
-﻿name: Build Kinetix APK
+name: Build Kinetix APK
+
 on:
   push:
     branches: [ main ]
@@ -13,30 +14,31 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
           java-version: '17'
           cache: 'gradle'
+
       - name: Build Debug APK
         run: |
           chmod +x gradlew
           ./gradlew assembleDebug --no-daemon
-          cp app/build/outputs/apk/debug/app-debug.apk Kinetix-v1.0.0.apk
+          APK_PATH=$(find app/build/outputs/apk -name "*-debug.apk" | head -n 1)
+          echo "Found APK: $APK_PATH"
+          cp "$APK_PATH" Kinetix-v1.0.0.apk
+
       - name: Upload Kinetix APK Artifact
         uses: actions/upload-artifact@v4
         with:
           name: Kinetix-Debug-APK
           path: Kinetix-v1.0.0.apk
+
       - name: Publish to GitHub Releases
-        if: startsWith(github.ref, 'refs/tags/v')
         uses: softprops/action-gh-release@v2
         with:
+          tag_name: v1.0.0
           name: Kinetix v1.0.0 - Glassmorphic Video Player
-          body: |
-            ### Kinetix Local Video Player (v1.0.0)
-            - **Glassmorphic UI**: Translucent HUD capsules, specular borders, and bouncy spring physics.
-            - **Gesture Engine**: Long-press + horizontal swipe dynamic playback speed control with precision settings.
-            - **Online Subtitles**: Direct in-player subtitle search and auto-attachment.
           files: Kinetix-v1.0.0.apk
